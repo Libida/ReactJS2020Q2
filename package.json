@@ -1,0 +1,26 @@
+{
+  "name": "reactjs2020q2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server/app.js",
+  "scripts": {
+    "start": "node src/server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Libida/ReactJS2020Q2.git"
+  },
+  "author": "Maryia Sinkevich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Libida/ReactJS2020Q2/issues"
+  },
+  "homepage": "https://github.com/Libida/ReactJS2020Q2#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.1-security"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
+  }
+}

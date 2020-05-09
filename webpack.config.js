@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = (env, argv) => {
     const isDevMod = argv.mode === 'production';
@@ -39,6 +40,13 @@ module.exports = (env, argv) => {
                 template: "./src/client/index.html"
             })
         ],
+        optimization: {
+            minimizer: [new UglifyJsPlugin({
+                uglifyOptions: {
+                    keep_fnames: true,
+                    mangle: false
+                }})],
+        },
         devtool: isDevMod ? 'source-map' : 'none'
     }
 };

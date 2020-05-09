@@ -4,14 +4,14 @@
   "description": "",
   "main": "src/server/index.js",
   "scripts": {
-    "build:dev": "webpack",
-    "build:prod": "NODE_ENV=production webpack",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production",
     "eslint": "eslint ./src/client --ext .js,.jsx",
-    "start": "npm run build && node src/server/index.js",
-    "client": "concurrently \"webpack-dev-server --hot\" \"watch 'npm run eslint'\"",
-    "server:dev": "nodemon src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "prod": "NODE_ENV=production concurrently \"npm run server\" \"npm run client\"",
+    "client:dev": "concurrently \"webpack-dev-server --hot --mode=development\" \"watch 'npm run eslint'\"",
+    "client:prod": "concurrently \"webpack-dev-server --hot --mode=production\" \"watch 'npm run eslint'\"",
+    "server": "nodemon src/server/index.js",
+    "start:dev": "concurrently \"npm run server\" \"npm run client:dev\"",
+    "start:prod": "--mode=production concurrently \"npm run server\" \"npm run client:prod\"",
     "test": "jest"
   },
   "repository": {

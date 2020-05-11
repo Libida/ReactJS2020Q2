@@ -1,44 +1,8 @@
-/* eslint-disable */
-import React, {
-    Component,
-    PureComponent,
-    Fragment,
-    createElement,
-} from 'react';
-import { render } from 'react-dom';
+import './style.scss';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { MovieDetailsView } from './views/MovieDetailsView';
+import { MoviesListingView } from './views/MoviesListingView';
 
-const greeting = 'Hello World';
-
-// 2. React.Component
-class HelloComponent extends Component {
-    render() {
-        return <h2>{greeting} from {this.props.from}</h2>;
-    };
-}
-
-// 3. React.PureComponent
-class HelloPureComponent extends PureComponent {
-    render() {
-        return <h3>{greeting} from {this.props.from}</h3>;
-    };
-}
-
-// 4. Functional components
-function HelloFunctionalComponent({from}) {
-    return <h4>{greeting} from {from}</h4>;
-}
-
-// 1. React.CreateElement
-render(
-    createElement(HelloComponent, {from: 'React.createElement'}, null),
-    document.getElementById('root1')
-);
-
-render(
-    <Fragment>
-        <HelloComponent from='React.Component'/>
-        <HelloPureComponent from='Pure Component'/>
-        <HelloFunctionalComponent from='Functional Component'/>
-    </Fragment>,
-    document.getElementById('root2')
-);
+ReactDOM.render(<MoviesListingView/>, document.getElementById('root1'));
+ReactDOM.render(<MovieDetailsView/>, document.getElementById('root2'));

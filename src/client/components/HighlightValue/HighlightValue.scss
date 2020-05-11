@@ -1,0 +1,16 @@
+@import "../../style";
+
+.highlight-value {
+  display: inline-block;
+  margin-right: $grid-gutter-width;
+}
+
+.highlight-value__value {
+  color: $red;
+  font-size: 180%;
+}
+
+.highlight-value__after-value {
+  padding-left: 1%;
+  color: $gray-600;
+}

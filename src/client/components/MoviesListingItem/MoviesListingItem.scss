@@ -1,0 +1,27 @@
+.movie-listing-item {
+  width: 100%;
+  position: relative;
+}
+
+.movie-listing-item__link {
+  &:hover {
+    text-decoration: none;
+
+    .img {
+      filter: grayscale(50%);
+    }
+  }
+}
+
+.movie-listing-item__img-wrap {
+  padding-bottom: 150%;
+}
+
+.movie-listing-item__img {
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

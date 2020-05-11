@@ -22,10 +22,13 @@ module.exports = (env, argv) => {
                     }
                 },
                 {
-                    test: /\.css$/,
-                    use: ["style-loader", "css-loader"]
+                    test: /\.(sa|sc)ss$/,
+                    use: ["style-loader", "css-loader", "sass-loader"]
                 }
             ]
+        },
+        resolve: {
+            extensions: ['.js', '.jsx'],
         },
         devServer: {
             port: 3000,

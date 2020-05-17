@@ -1,0 +1,10 @@
+.img-wrap {
+  display: block;
+  position: relative;
+  outline: none;
+  width: 100%;
+
+  .img {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,14 @@
+@import "../../style";
+
+.movie-details {
+  margin-top: $grid-gutter-width;
+}
+
+.movie-details__heading__text {
+  margin-right: $spacer;
+}
+
+.movie-details__digits {
+  margin-top: $grid-gutter-width;
+  margin-bottom: $grid-gutter-width;
+}

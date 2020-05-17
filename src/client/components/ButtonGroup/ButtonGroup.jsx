@@ -9,11 +9,12 @@ function ButtonGroupFunc({id, groupArray, handler, selectedValue, incomeClasses}
         const textLowerCase = text.toLowerCase();
         const valueLowerCase = value.toLowerCase();
         const isChecked = (selectedValue.toLowerCase() === valueLowerCase);
+        const idPostfix = `${id}-${index}`;
 
         return (
             <label className={`btn btn-secondary ${isChecked ? 'active' : ''}`}
-                   key={text.replace(/\s/g, '_')}>
-                <input type="radio" name={id} id={`${id}-${index}`} value={valueLowerCase} defaultChecked={isChecked}/>
+                   key={text.replace(/\s/g, '_')} id={`label-${idPostfix}`}>
+                <input type="radio" name={id} id={idPostfix} value={valueLowerCase} defaultChecked={isChecked}/>
                 {textLowerCase}
             </label>
         );

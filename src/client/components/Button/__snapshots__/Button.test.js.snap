@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component should be rendered properly if disabled 1`] = `
+<button
+  className="btn "
+  isDisabled="true"
+  type="button"
+>
+  Search
+</button>
+`;
+
+exports[`Button component should be rendered properly with additional classes 1`] = `
+<button
+  className="btn "
+  incomeClasses="btn-primary"
+  isDisabled="true"
+  type="submit"
+>
+  Search
+</button>
+`;
+
+exports[`Button component should be rendered properly with default props 1`] = `
+<button
+  className="btn "
+  type="button"
+>
+  Search
+</button>
+`;
+
+exports[`Button component should be rendered properly with different type 1`] = `
+<button
+  className="btn "
+  isDisabled="true"
+  type="submit"
+>
+  Search
+</button>
+`;

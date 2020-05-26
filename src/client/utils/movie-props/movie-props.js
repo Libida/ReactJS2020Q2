@@ -1,4 +1,4 @@
-import { NO_MOVIE_YEAR } from '../constants';
+import { NO_MOVIE_YEAR } from '../../constants';
 
 export const getMovieYear = (movie = {}) => {
     const {release_date = NO_MOVIE_YEAR} = movie;

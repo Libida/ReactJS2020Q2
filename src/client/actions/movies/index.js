@@ -11,7 +11,6 @@ const axios = require("axios");
 function fetchMoviesInner(params) {
     const url = getMoviesSearchURL(params);
 
-    console.log(url);
     return axios(url);
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MovieListingItem } from '../MoviesListingItem';
 
-export function Movies({movies}) {
+function MoviesComponent({movies = []}) {
     let moviesContent;
 
     if (movies.length) {
@@ -26,6 +26,8 @@ export function Movies({movies}) {
     );
 }
 
-Movies.propsType = {
+MoviesComponent.propsType = {
     movie: PropTypes.object,
 };
+
+export const Movies = React.memo(MoviesComponent);

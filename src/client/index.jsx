@@ -1,8 +1,22 @@
 import './style.scss';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { MovieDetailsView } from './pages/MovieDetailsPage';
-import { MoviesListingView } from './pages/MoviesListingPage';
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
+import MovieDetailsPage from './pages/MovieDetailsPage';
+import MoviesListingPage from './pages/MoviesListingPage';
+import {rootReducer} from './reducers';
 
-ReactDOM.render(<MoviesListingView/>, document.getElementById('root1'));
-ReactDOM.render(<MovieDetailsView/>, document.getElementById('root2'));
+const store = createStore(
+    rootReducer,
+    applyMiddleware(thunkMiddleware)
+);
+
+render(
+    <Provider store={store}>
+        <MovieDetailsPage />
+        <MoviesListingPage />
+    </Provider>,
+    document.getElementById('root')
+);

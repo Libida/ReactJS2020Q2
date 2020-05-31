@@ -7,9 +7,10 @@ import { HighlightValue } from '../HighlightValue';
 import { NO_MOVIE_TITLE } from '../../constants';
 import { getMovieGenresString } from '../../utils/movie-props';
 
-export function MovieDetails({movie}) {
+export function MovieDetailsComponent({movie = {}}) {
     const {title = NO_MOVIE_TITLE, poster_path, vote_average, overview, runtime = 0} = movie;
 
+    console.log(poster_path);
     return (
         <div className="row movie-details">
             <div className="col-12 col-sm-6">
@@ -35,10 +36,12 @@ export function MovieDetails({movie}) {
     );
 }
 
-Image.propTypes = {
+MovieDetailsComponent.propTypes = {
     movie: PropTypes.object,
 };
 
-Image.defaultProps = {
+MovieDetailsComponent.defaultProps = {
     movie: {}
 };
+
+export const MovieDetails = React.memo(MovieDetailsComponent);

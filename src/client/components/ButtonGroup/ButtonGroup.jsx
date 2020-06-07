@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './ButtonGroup.scss';
 import PropTypes from 'prop-types';
 
-function ButtonGroupFunc({id, groupArray, handler, selectedValue, incomeClasses}) {
+function ButtonGroup({id, groupArray, handler, selectedValue, incomeClasses, isDisabled}) {
     let buttonGroupItems = groupArray.map((btnToggle, index) => {
         const text = btnToggle.text || '';
         const value = btnToggle.value || text || '';
@@ -11,23 +11,26 @@ function ButtonGroupFunc({id, groupArray, handler, selectedValue, incomeClasses}
         const isChecked = (selectedValue.toLowerCase() === valueLowerCase);
         const idPostfix = `${id}-${index}`;
 
+        console.log(`selectedValue = ${selectedValue}`);
+
         return (
             <label className={`btn btn-secondary ${isChecked ? 'active' : ''}`}
                    key={text.replace(/\s/g, '_')} id={`label-${idPostfix}`}>
-                <input type="radio" name={id} id={idPostfix} value={valueLowerCase} defaultChecked={isChecked}/>
+                <input type="radio" onClick={handler} name={id} id={idPostfix} value={valueLowerCase} defaultChecked={isChecked} disabled={isDisabled}/>
                 {textLowerCase}
             </label>
         );
     });
 
     return (
-        <div className={`btn-group btn-group-toggle ${incomeClasses}`} id={id} onChange={handler}>
-            {buttonGroupItems}
-        </div>
+        <Fragment>
+            <input type="hidden" name={id} value={selectedValue} />
+            <div className={`btn-group btn-group-toggle ${incomeClasses}`} id={id}>
+                {buttonGroupItems}
+            </div>
+        </Fragment>
     );
 };
-
-export const ButtonGroup = React.memo(ButtonGroupFunc, (props1, props2) => (props1.id === props2.id && props1.selectedValue === props2.selectedValue));
 
 ButtonGroup.propsType = {
     id: PropTypes.string,
@@ -41,4 +44,6 @@ ButtonGroup.defaultProps = {
     selectedValue: '',
     incomeClasses: '',
 };
+
+export default React.memo(ButtonGroup, (props1, props2) => (props1.id === props2.id && props1.selectedValue === props2.selectedValue && props1.isDisabled === props2.isDisabled));
 

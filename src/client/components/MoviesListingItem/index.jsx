@@ -1,1 +1,1 @@
-export * from './MoviesListingItem';
+export {default as MovieListingItem} from './MoviesListingItem';

@@ -1,34 +1,26 @@
 import './style.scss';
 import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+import {render} from 'react-dom';
+import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
-import { PersistGate } from 'redux-persist/integration/react';
-import storage from 'redux-persist/lib/storage';
-import MovieDetailsPage from './pages/MovieDetailsPage';
-import MoviesListingPage from './pages/MoviesListingPage';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {rootReducer} from './reducers';
+import {getRoutes} from './routes';
 
-const persistConfig = {
-    key: 'root',
-    storage,
-};
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
-    persistedReducer,
-    applyMiddleware(thunkMiddleware)
+    rootReducer,
+    composeEnhancers(
+        applyMiddleware(thunkMiddleware)
+    )
 );
 
-const persistor = persistStore(store);
+const routes = getRoutes(store);
 
 render(
     <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-            <MovieDetailsPage />
-            <MoviesListingPage />
-        </PersistGate>
+            {routes}
     </Provider>,
     document.getElementById('root')
 );

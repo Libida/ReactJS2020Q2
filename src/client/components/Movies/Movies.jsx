@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MovieListingItem } from '../MoviesListingItem';
+import {MovieListingItem} from '../MoviesListingItem';
 
-function MoviesComponent({movies = []}) {
+function Movies({movies = []}) {
     let moviesContent;
 
     if (movies.length) {
@@ -26,8 +26,8 @@ function MoviesComponent({movies = []}) {
     );
 }
 
-MoviesComponent.propsType = {
+Movies.propsType = {
     movie: PropTypes.object,
 };
 
-export const Movies = React.memo(MoviesComponent);
+export default React.memo(Movies);

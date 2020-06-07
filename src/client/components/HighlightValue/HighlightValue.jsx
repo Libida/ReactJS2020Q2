@@ -2,7 +2,7 @@ import React from 'react';
 import './HighlightValue.scss';
 import PropTypes from 'prop-types';
 
-export function HighlightValue({value, afterValue, className}) {
+function HighlightValue({value, afterValue, className}) {
     return (
         <span className={`highlight-value ${className}`}>
             <span className="highlight-value__value">
@@ -24,3 +24,5 @@ HighlightValue.propsType = {
 HighlightValue.defaultProps = {
     className: '',
 };
+
+export default HighlightValue;

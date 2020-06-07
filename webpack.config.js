@@ -10,7 +10,8 @@ module.exports = (env, argv) => {
         entry: ['./src/client/index.jsx'],
         output: {
             path: path.join(__dirname, 'public'),
-            filename: "[name].js"
+            filename: "[name].js",
+            publicPath: '/'
         },
         module: {
             rules: [
@@ -35,7 +36,8 @@ module.exports = (env, argv) => {
             open: true,
             proxy: {
                 "/api": "http://localhost:8080" // For potential future use with SSR
-            }
+            },
+            historyApiFallback: true,
         },
         plugins: [
             new CleanWebpackPlugin(),

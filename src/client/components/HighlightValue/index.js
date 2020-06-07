@@ -1,1 +1,1 @@
-export * from './HighlightValue';
+export {default as HighlightValue} from './HighlightValue';

@@ -1,15 +1,9 @@
 import {
     MOVIE_API_URL,
     UPDATE_MOVIE
-} from "../../constants";
+} from '../../constants';
 
-const axios = require("axios");
-
-function fetchMovie(id) {
-    const movieURL = `${MOVIE_API_URL}/${id}`;
-
-    return axios(movieURL);
-}
+const axios = require('axios').default;
 
 export function showMovie(data) {
     return {
@@ -20,7 +14,8 @@ export function showMovie(data) {
 
 export function getMovie(id) {
     return function(dispatch) {
-        return fetchMovie(id)
+        return axios
+            .get(`${MOVIE_API_URL}/${id}`)
             .then(function (response = {}) {
                 dispatch(showMovie(response.data))
             })

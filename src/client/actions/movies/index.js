@@ -1,4 +1,6 @@
 import {
+    SEARCH_BY_DEFAULT_VALUE,
+    SORT_BY_DEFAULT_VALUE,
     UPDATE_MOVIES,
     UPDATE_SEARCH_BY,
     UPDATE_SEARCH_TERM,
@@ -6,28 +8,19 @@ import {
 } from '../../constants';
 import {getMoviesSearchURL} from '../../utils/urls';
 
-const axios = require("axios");
-
-function fetchMoviesInner(params) {
-    const url = getMoviesSearchURL(params);
-
-    return axios(url);
-}
-
-function fetchMovies(params) {
-    return fetchMoviesInner(params)
-        .catch(error => console.log(error));
-}
+const axios = require('axios').default;
 
 export function updateMovies(params) {
     return function (dispatch) {
-        return fetchMovies(params).then(data => {
-            dispatch(showMovies(data));
-        });
+        return axios.get(getMoviesSearchURL(params))
+            .catch(error => console.log(error))
+            .then(data => {
+                dispatch(showMovies(data));
+            });
     };
 }
 
-function showMovies(data = {}) {
+export function showMovies(data = {}) {
     return {
         type: UPDATE_MOVIES,
         payload: data.data
@@ -46,14 +39,23 @@ export function updateSortBy(sortBy) {
         type: UPDATE_SORT_BY,
         payload: sortBy
     };
-};
+}
 
 export function updateSortByAsync(sortBy) {
     return function (dispatch) {
         dispatch(updateSortBy(sortBy));
         return Promise.resolve();
     }
-};
+}
+
+export function resetMoviesSearch() {
+    return function (dispatch) {
+        dispatch(updateSearchTerm(''));
+        dispatch(updateSortBy(SORT_BY_DEFAULT_VALUE));
+        dispatch(updateSearchBy(SEARCH_BY_DEFAULT_VALUE));
+        dispatch(showMovies({data: {data: []}}));
+    }
+}
 
 export function updateSearchBy(searchBy) {
     return {

@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './MovieDetails.scss';
-import { Image } from '../Image';
-import { MovieYear } from '../MovieYear';
-import { HighlightValue } from '../HighlightValue';
-import { NO_MOVIE_TITLE } from '../../constants';
-import { getMovieGenresString } from '../../utils/movie-props';
 
-export function MovieDetailsComponent({movie = {}}) {
-    const {title = NO_MOVIE_TITLE, poster_path, vote_average, overview, runtime = 0} = movie;
+import './MovieDetails.scss';
+import {Image} from '../Image';
+import {MovieYear} from '../MovieYear';
+import {HighlightValue} from '../HighlightValue';
+import {NO_MOVIE_TITLE} from '../../constants';
+import {getMovieGenresString} from '../../utils/movie-props';
+
+export function MovieDetails({movie = {}}) {
+    const {id, title = NO_MOVIE_TITLE, poster_path, vote_average, overview, runtime = 0} = movie;
 
     return (
         <div className="row movie-details">
@@ -35,12 +36,12 @@ export function MovieDetailsComponent({movie = {}}) {
     );
 }
 
-MovieDetailsComponent.propTypes = {
+MovieDetails.propTypes = {
     movie: PropTypes.object,
 };
 
-MovieDetailsComponent.defaultProps = {
+MovieDetails.defaultProps = {
     movie: {}
 };
 
-export const MovieDetails = React.memo(MovieDetailsComponent);
+export default React.memo(MovieDetails);

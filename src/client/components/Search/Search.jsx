@@ -1,17 +1,18 @@
 import React from 'react';
-import { Input } from '../Input';
-import { Button } from '../Button';
-import { ButtonGroup } from '../ButtonGroup';
-import { Panel } from '../Panel';
+import PropTypes from 'prop-types';
+
+import {Input} from '../Input';
+import {Button} from '../Button';
+import {ButtonGroup} from '../ButtonGroup';
+import {Panel} from '../Panel';
 import {
     TITLE_TEXT,
     GENRE_TEXT,
     SEARCH_BY_PARAM_TEXT,
     SEARCH_TERM_PARAM_TEXT
 } from '../../constants';
-import PropTypes from 'prop-types';
 
-export function Search({movies, searchTerm, searchBy, sortBy, handleSearchTerm, handleSearchBy, handleSortBy, handleFullSearch}) {
+function Search({movies, searchTerm, searchBy, sortBy, handleSearchTerm, handleSearchBy, handleSortBy, handleFullSearch, isSearchByDisabled}) {
     const handlerSearchTerm = (event) => {
         handleSearchTerm(event.target.value);
     };
@@ -20,13 +21,10 @@ export function Search({movies, searchTerm, searchBy, sortBy, handleSearchTerm, 
         handleSearchBy(event.target.value);
     };
 
-    const handlerSortBy = (target) => {
-        handleSortBy(target);
-    };
-
     const handlerFullSearch = (event) => {
         event.preventDefault();
-        handleFullSearch(movies);
+        const data = new FormData(event.target);
+        handleFullSearch(data);
     };
 
     return (
@@ -54,11 +52,11 @@ export function Search({movies, searchTerm, searchBy, sortBy, handleSearchTerm, 
                                 <div className="col-sm-12">
                                     <ButtonGroup groupArray={[{text: TITLE_TEXT}, {text: GENRE_TEXT}]}
                                                  id={SEARCH_BY_PARAM_TEXT} handler={handlerSearchBy}
-                                                 selectedValue={searchBy}/>
+                                                 selectedValue={searchBy} />
                                 </div>
                             </div>
 
-                            <Panel movies={movies} sortBy={sortBy} handleSortBy={handlerSortBy} />
+                            <Panel movies={movies} sortBy={sortBy} handleSortBy={handleSortBy} isSearchByDisabled={isSearchByDisabled} />
                         </form>
                     </div>
                 </div>
@@ -81,3 +79,5 @@ Search.propsType = {
 Search.defaultProps = {
     movies: {},
 };
+
+export default Search;

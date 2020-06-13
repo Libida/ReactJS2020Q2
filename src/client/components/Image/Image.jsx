@@ -1,9 +1,24 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {NO_IMG_URL} from '../../constants';
+
 import './Image.scss';
 
-export class Image extends Component {
+const NO_IMG_URL = 'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png';
+
+class Image extends Component {
+    static propTypes = {
+        src: PropTypes.string,
+        alt: PropTypes.string,
+        title: PropTypes.string,
+        incomeClasses: PropTypes.string,
+        incomeWrapClasses: PropTypes.string
+    };
+
+    static defaultProps = {
+        incomeClasses: '',
+        incomeWrapClasses: ''
+    };
+
     constructor(props = {}) {
         super(props);
         this.state = {
@@ -48,15 +63,4 @@ export class Image extends Component {
     }
 };
 
-Image.propTypes = {
-    src: PropTypes.string,
-    alt: PropTypes.string,
-    title: PropTypes.string,
-    incomeClasses: PropTypes.string,
-    incomeWrapClasses: PropTypes.string
-};
-
-Image.defaultProps = {
-    incomeClasses: '',
-    incomeWrapClasses: ''
-};
+export default Image;

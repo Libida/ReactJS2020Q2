@@ -1,1 +1,1 @@
-export * from './MovieYear';
+export {default as MovieYear} from './MovieYear';

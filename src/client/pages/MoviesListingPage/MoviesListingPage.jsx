@@ -46,7 +46,6 @@ class MoviesListingPage extends PureComponent {
 
         // On Home return everything to initial empty state
         if (isHome && (isHome !== prevProps.isHome)) {
-            console.log("!!!!!!!!RESET");
             this.props.resetMoviesSearch();
         }
     }

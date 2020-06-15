@@ -4,6 +4,7 @@ const port = 8080;
 const ghpages = require('gh-pages');
 
 index.use(express.static('public'));
+index.use(require('./serverRenderer'));
 index.listen(port, () => console.log(`React app listening at http://localhost:${port}`));
 
 ghpages.publish('public', function (err) {});

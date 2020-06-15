@@ -1,6 +1,6 @@
 import './style.scss';
 import React from 'react';
-import {render} from 'react-dom';
+import {hydrate} from 'react-dom';
 import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import {createStore, applyMiddleware, compose} from 'redux';
@@ -18,9 +18,9 @@ const store = createStore(
 
 const routes = getRoutes(store);
 
-render(
+hydrate(
     <Provider store={store}>
-            {routes}
+        {routes}
     </Provider>,
     document.getElementById('root')
 );

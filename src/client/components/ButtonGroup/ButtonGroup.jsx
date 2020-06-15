@@ -11,8 +11,6 @@ function ButtonGroup({id, groupArray, handler, selectedValue, incomeClasses, isD
         const isChecked = (selectedValue.toLowerCase() === valueLowerCase);
         const idPostfix = `${id}-${index}`;
 
-        console.log(`selectedValue = ${selectedValue}`);
-
         return (
             <label className={`btn btn-secondary ${isChecked ? 'active' : ''}`}
                    key={text.replace(/\s/g, '_')} id={`label-${idPostfix}`}>

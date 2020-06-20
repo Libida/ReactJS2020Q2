@@ -2,13 +2,16 @@ const path = require('path');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
 const isDevelop = process.env.NODE_ENV === 'development';
 
 const getProductionPlugins = () => {
     if (!isDevelop) {
         return [
-            new UglifyJsPlugin(),
-            new webpack.HashedModuleIdsPlugin(),
+            // new UglifyJsPlugin(),
+            // new OptimizeCSSAssetsPlugin(),
+            // new webpack.HashedModuleIdsPlugin(),
         ];
     }
     return [];

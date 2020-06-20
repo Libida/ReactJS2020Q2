@@ -1,15 +1,14 @@
-const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.config.common');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const isDevelop = process.env.NODE_ENV === 'development';
 
 const getDevelopmentPlugins = () => {
     if (isDevelop) {
         return [
+            new CleanWebpackPlugin(),
             new webpack.HotModuleReplacementPlugin()
         ];
     }
@@ -30,9 +29,9 @@ module.exports = merge(common, {
     entry: [
         isDevelop && 'webpack-hot-middleware/client',
         './src/client/client.jsx',
-    ],
+    ].filter(Boolean),
     plugins: [
         ...getDevelopmentPlugins(),
         ...getCommonPlugins()
-    ],
+    ].filter(Boolean),
 });

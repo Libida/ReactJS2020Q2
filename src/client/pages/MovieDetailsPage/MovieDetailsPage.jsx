@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {get} from 'lodash';
 
 import {MovieDetails} from '../../components/MovieDetails';
 import {getMovie} from '../../actions/movie';
@@ -14,8 +15,9 @@ class MovieDetailsPage extends PureComponent {
 
     componentDidMount() {
         const {match} = this.props;
+        const movieId = get(match, 'params.id');
 
-        this.props.getMovie(match.params.id);
+        this.props.getMovie(movieId);
     }
 
     static getDerivedStateFromError(error) {
@@ -46,11 +48,8 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getMovie: (id) => dispatch(getMovie(id)),
-        dispatch
-    }
+const mapDispatchToProps = {
+    getMovie
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsPage);

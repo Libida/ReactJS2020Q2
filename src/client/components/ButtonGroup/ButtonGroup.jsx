@@ -43,5 +43,8 @@ ButtonGroup.defaultProps = {
     incomeClasses: '',
 };
 
-export default React.memo(ButtonGroup, (props1, props2) => (props1.id === props2.id && props1.selectedValue === props2.selectedValue && props1.isDisabled === props2.isDisabled));
+export default React.memo(ButtonGroup, (props1, props2) =>
+    (props1.id === props2.id &&
+        props1.selectedValue === props2.selectedValue &&
+            props1.isDisabled === props2.isDisabled));
 

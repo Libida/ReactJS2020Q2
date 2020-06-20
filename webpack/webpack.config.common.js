@@ -9,9 +9,9 @@ const isDevelop = process.env.NODE_ENV === 'development';
 const getProductionPlugins = () => {
     if (!isDevelop) {
         return [
-            // new UglifyJsPlugin(),
-            // new OptimizeCSSAssetsPlugin(),
-            // new webpack.HashedModuleIdsPlugin(),
+            new UglifyJsPlugin(),
+            new OptimizeCSSAssetsPlugin(),
+            new webpack.HashedModuleIdsPlugin(),
         ];
     }
     return [];

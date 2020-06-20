@@ -24,11 +24,6 @@ class MoviesListingPage extends PureComponent {
         this.state = {
             hasError: false
         };
-
-        this.handleFullSearch = this.handleFullSearch.bind(this);
-        this.handleSortBy = this.handleSortBy.bind(this);
-        this.handleSearchBy = this.handleSearchBy.bind(this);
-        this.handleSearchTerm = this.handleSearchTerm.bind(this);
     }
 
     componentDidMount() {
@@ -50,15 +45,15 @@ class MoviesListingPage extends PureComponent {
         }
     }
 
-    handleSearchTerm(target) {
+    handleSearchTerm = (target) => {
         this.props.updateSearchTerm(target);
     }
 
-    handleSearchBy(target) {
+    handleSearchBy = (target) => {
         this.props.updateSearchBy(target);
     }
 
-    handleSortBy(target) {
+    handleSortBy = (target) => {
         const {location} = this.props;
         let params = new URLSearchParams(location.search);
 
@@ -68,7 +63,7 @@ class MoviesListingPage extends PureComponent {
         });
     }
 
-    handleFullSearch(params) {
+    handleFullSearch = (params) => {
         const {history} = this.props;
 
         history.push({
@@ -141,16 +136,13 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        resetMoviesSearch: () => dispatch(resetMoviesSearch()),
-        updateMovies: (params) => dispatch(updateMovies(params)),
-        updateSortBy: (params) => dispatch(updateSortBy(params)),
-        updateSortByAsync: (params) => dispatch(updateSortByAsync(params)),
-        updateSearchBy: (params) => dispatch(updateSearchBy(params)),
-        updateSearchTerm: (params) => dispatch(updateSearchTerm(params)),
-        dispatch
-    }
+const mapDispatchToProps = {
+    resetMoviesSearch,
+    updateMovies,
+    updateSortBy,
+    updateSortByAsync,
+    updateSearchBy,
+    updateSearchTerm,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesListingPage);

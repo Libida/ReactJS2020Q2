@@ -1,14 +1,21 @@
 import {
-    UPDATE_MOVIES, UPDATE_SEARCH_TERM, UPDATE_SEARCH_BY, UPDATE_SORT_BY
+    UPDATE_MOVIES,
+    UPDATE_SEARCH_TERM,
+    UPDATE_SEARCH_BY,
+    UPDATE_SORT_BY,
+    RESET_SEARCH,
+    SEARCH_BY_DEFAULT_VALUE,
+    SORT_BY_DEFAULT_VALUE,
+    SORT_ORDER_VALUE
 } from '../../constants';
 
 const initialState = {
     movies: [],
     moviesAmount: 0,
     searchTerm: '',
-    searchBy: '',
-    sortBy: '',
-    sortOrder: ''
+    searchBy: SEARCH_BY_DEFAULT_VALUE,
+    sortBy: SORT_BY_DEFAULT_VALUE,
+    sortOrder: SORT_ORDER_VALUE
 };
 
 export const moviesReducer = (state = initialState, action = {}) => {
@@ -34,6 +41,12 @@ export const moviesReducer = (state = initialState, action = {}) => {
                 ...state,
                 sortBy: action.payload
             };
+        case RESET_SEARCH:
+            return {
+                ...state,
+                ...initialState
+            };
+
         default:
             return state;
     }

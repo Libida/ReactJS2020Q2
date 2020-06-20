@@ -1,19 +1,61 @@
-function renderHtml() {
+import React from 'react';
+import {StaticRouter} from 'react-router-dom';
+import {renderToString} from 'react-dom/server';
+import {matchRoutes} from 'react-router-config';
+
+import App from './../client';
+import {routes} from '../client/routes';
+import configureStore from '../client/store';
+
+function renderHTML(html, initialState) {
     return `
-        <!doctype html>
-        <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width,initial-scale=1">
-                <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                <title>Test.js</title></head>
-            <body>
-               <h1>Hello Masha!</h1>
-            </body>
-        </html>
-    `;
+      <!doctype html>
+      <html>
+        <head>
+          <meta charset=utf-8>
+          <title>Movies</title>
+          <link rel="stylesheet" href="/main.css">
+        </head>
+        <body>
+          <div id="root">${html}</div>
+          <script>
+            window.INIT_STATE = ${JSON.stringify(initialState).replace(/</g, '\\\u003c')}
+          </script>
+          <script src="/js/main.js"></script>
+        </body>
+      </html>
+  `;
 }
 
-module.exports = (req, res) => {
-    res.send(renderHtml());
+export default function serverRenderer() {
+    return (req, res) => {
+        const store = configureStore();
+        const branch = matchRoutes(routes, req.url);
+
+        const promises = branch.map(({route}) => {
+            let fetchData = route.component.fetchData;
+            return fetchData instanceof Function ? fetchData(store, req) : Promise.resolve(null);
+        });
+
+        return Promise.all(promises).then(() => {
+            let context = {};
+            const content = renderToString(
+                <App
+                    context={context}
+                    location={req.url}
+                    Router={StaticRouter}
+                    store={store}
+                />
+            );
+            if (context.status === 404) {
+                res.status(404);
+            }
+            if (context.status === 302) {
+                return res.redirect(302, context.url);
+            }
+
+            const initialState = store.getState();
+            res.send(renderHTML(content, initialState));
+        });
+    };
 }

@@ -1,1 +1,1 @@
-export {default as getRoutes} from './routes';
+export {default as getRoutes, routes} from './routes';

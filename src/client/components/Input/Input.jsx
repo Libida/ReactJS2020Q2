@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Input.scss';
 
-function Input({id, type, placeholder, incomeClasses, text, handler}) {
+function Input({id, name, type, placeholder, incomeClasses, text, handler}) {
     return (
         <input type={type} placeholder={placeholder} name={name || id} id={id}
                className={`form-control ${incomeClasses}`} onChange={handler} value={text}></input>

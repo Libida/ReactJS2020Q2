@@ -1,10 +1,9 @@
 import {
-    SEARCH_BY_DEFAULT_VALUE,
-    SORT_BY_DEFAULT_VALUE,
     UPDATE_MOVIES,
     UPDATE_SEARCH_BY,
     UPDATE_SEARCH_TERM,
-    UPDATE_SORT_BY
+    UPDATE_SORT_BY,
+    RESET_SEARCH
 } from '../../constants';
 import {getMoviesSearchURL} from '../../utils/urls';
 
@@ -49,12 +48,9 @@ export function updateSortByAsync(sortBy) {
 }
 
 export function resetMoviesSearch() {
-    return function (dispatch) {
-        dispatch(updateSearchTerm(''));
-        dispatch(updateSortBy(SORT_BY_DEFAULT_VALUE));
-        dispatch(updateSearchBy(SEARCH_BY_DEFAULT_VALUE));
-        dispatch(showMovies({data: {data: []}}));
-    }
+    return {
+        type: RESET_SEARCH
+    };
 }
 
 export function updateSearchBy(searchBy) {

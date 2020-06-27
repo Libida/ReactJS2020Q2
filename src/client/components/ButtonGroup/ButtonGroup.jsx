@@ -11,8 +11,6 @@ function ButtonGroup({id, groupArray, handler, selectedValue, incomeClasses, isD
         const isChecked = (selectedValue.toLowerCase() === valueLowerCase);
         const idPostfix = `${id}-${index}`;
 
-        console.log(`selectedValue = ${selectedValue}`);
-
         return (
             <label className={`btn btn-secondary ${isChecked ? 'active' : ''}`}
                    key={text.replace(/\s/g, '_')} id={`label-${idPostfix}`}>
@@ -45,5 +43,8 @@ ButtonGroup.defaultProps = {
     incomeClasses: '',
 };
 
-export default React.memo(ButtonGroup, (props1, props2) => (props1.id === props2.id && props1.selectedValue === props2.selectedValue && props1.isDisabled === props2.isDisabled));
+export default React.memo(ButtonGroup, (props1, props2) =>
+    (props1.id === props2.id &&
+        props1.selectedValue === props2.selectedValue &&
+            props1.isDisabled === props2.isDisabled));
 

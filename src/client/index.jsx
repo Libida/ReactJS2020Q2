@@ -1,26 +1,16 @@
-import './style.scss';
 import React from 'react';
-import {render} from 'react-dom';
 import {Provider} from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
-import {createStore, applyMiddleware, compose} from 'redux';
-import {rootReducer} from './reducers';
+import {hot} from 'react-hot-loader';
 import {getRoutes} from './routes';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const Root = ({ Router, location, context, store}) => {
+    const routes = getRoutes({Router, store, context, location});
 
-const store = createStore(
-    rootReducer,
-    composeEnhancers(
-        applyMiddleware(thunkMiddleware)
-    )
-);
-
-const routes = getRoutes(store);
-
-render(
-    <Provider store={store}>
+    return (
+        <Provider store={store}>
             {routes}
-    </Provider>,
-    document.getElementById('root')
-);
+        </Provider>
+    );
+}
+
+export default hot(module)(Root);

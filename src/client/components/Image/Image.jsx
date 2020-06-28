@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-import './Image.scss';
+import styled from 'styled-components';
 
 const NO_IMG_URL = 'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png';
 
-class Image extends Component {
+const Wrapper = styled.div`
+    display: block;
+    position: relative;
+    outline: none;
+    width: 100%;
+`;
+
+export const Img = styled.img`
+    max-width: 100%;
+`;
+
+export class Image extends Component {
     static propTypes = {
         src: PropTypes.string,
         alt: PropTypes.string,
@@ -52,15 +62,12 @@ class Image extends Component {
 
     render() {
         const {src} = this.state;
-        const {alt, title, incomeClasses, incomeWrapClasses} = this.props;
+        const {alt, title, className} = this.props;
 
         return (
-            <span className={`img-wrap ${incomeWrapClasses}`}>
-                <img src={src} alt={alt || title} title={title}
-                     className={`img ${incomeClasses}`} onError={this.updateImgOnError.bind(this)}/>
-            </span>
+            <Wrapper className={className}>
+                <Img src={src} alt={alt || title} title={title} onError={this.updateImgOnError.bind(this)} />
+            </Wrapper>
         );
     }
 };
-
-export default Image;

@@ -10,8 +10,7 @@
     "start:dev": "NODE_ENV=development node src/server/index.js",
     "start:prod": "npm run build:prod && npm run serve:prod",
     "test": "jest --coverage",
-    "cypress:open": "cypress open",
-    "flow": "flow"
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",

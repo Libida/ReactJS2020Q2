@@ -14,7 +14,8 @@ export function MovieDetails({movie = {}}) {
     return (
         <div className="row movie-details">
             <div className="col-12 col-sm-6">
-                <Image src={poster_path} title={title} />
+                <Image src={poster_path} title={title} incomeClasses="movie-details__img"
+                       incomeWrapClasses="movie-details__img-wrap"/>
             </div>
             <div className="col-12 col-sm-6">
                 <h1 className="movie-details__heading">

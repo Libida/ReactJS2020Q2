@@ -1,3 +1,4 @@
+import {List} from 'immutable';
 import {
     UPDATE_MOVIES,
     UPDATE_SEARCH_TERM,
@@ -10,7 +11,7 @@ import {
 } from '../../constants';
 
 const initialState = {
-    movies: [],
+    movies: List(),
     moviesAmount: 0,
     searchTerm: '',
     searchBy: SEARCH_BY_DEFAULT_VALUE,

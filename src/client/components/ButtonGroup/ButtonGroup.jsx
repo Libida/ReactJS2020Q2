@@ -8,11 +8,11 @@ function ButtonGroup({id, groupArray, handler, selectedValue, incomeClasses, isD
         const value = btnToggle.value || text || '';
         const textLowerCase = text.toLowerCase();
         const valueLowerCase = value.toLowerCase();
-        const isChecked = (selectedValue.toLowerCase() === valueLowerCase);
+        const isChecked = selectedValue ? (selectedValue.toLowerCase() === valueLowerCase) : (index === 0);
         const idPostfix = `${id}-${index}`;
 
         return (
-            <label className={`btn btn-secondary ${isChecked ? 'active' : ''}`}
+            <label className={`btn btn-secondary ${isChecked ? 'active' : ''} ${isDisabled ? 'disabled' : ''}`}
                    key={text.replace(/\s/g, '_')} id={`label-${idPostfix}`}>
                 <input type="radio" onClick={handler} name={id} id={idPostfix} value={valueLowerCase} defaultChecked={isChecked} disabled={isDisabled}/>
                 {textLowerCase}
@@ -41,6 +41,7 @@ ButtonGroup.propsType = {
 ButtonGroup.defaultProps = {
     selectedValue: '',
     incomeClasses: '',
+    handler: () => {}
 };
 
 export default React.memo(ButtonGroup, (props1, props2) =>

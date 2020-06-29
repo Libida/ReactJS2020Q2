@@ -1,8 +1,17 @@
+// @flow
 import React from 'react';
 import './HighlightValue.scss';
 import PropTypes from 'prop-types';
 
-function HighlightValue({value, afterValue, className}) {
+function HighlightValue({
+    value,
+    afterValue,
+    className
+}: {
+    value: string,
+    afterValue: string,
+    className: string
+}) {
     return (
         <span className={`highlight-value ${className}`}>
             <span className="highlight-value__value">

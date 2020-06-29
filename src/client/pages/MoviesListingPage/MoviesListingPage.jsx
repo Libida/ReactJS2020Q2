@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
 
 import {
     updateMovies,
@@ -121,18 +122,29 @@ class MoviesListingPage extends PureComponent {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    const {moviesListing} = state;
-    const {movies, searchBy, sortBy, searchTerm} = moviesListing;
-    const {location} = ownProps;
-    const queryString = location.search;
-    const params = new URLSearchParams(queryString);
+const getMovies = (state, ownProps) => state.moviesListing.movies;
+const getSearchBy = (state, ownProps) => state.moviesListing.searchBy;
+const getSortBy = (state, ownProps) => state.moviesListing.sortBy;
+const getSearchTerm = (state, ownProps) => state.moviesListing.searchTerm;
+const getLocation = (state, ownProps) => ownProps.location.search;
 
+const getMoviesProps = createSelector(
+    [getMovies, getSearchBy, getSortBy, getSearchTerm, getLocation],
+    (movies, searchBy, sortBy, searchTerm, queryString) => {
+        const params = new URLSearchParams(queryString);
+
+        return {
+            movies,
+            searchBy: searchBy || params.get(SEARCH_BY_PARAM_TEXT) || SEARCH_BY_DEFAULT_VALUE,
+            sortBy: sortBy || params.get(SORT_BY_PARAM_TEXT) || SORT_BY_DEFAULT_VALUE,
+            searchTerm: searchTerm || params.get(SEARCH_TERM_PARAM_TEXT) || '',
+        }
+    }
+)
+
+const mapStateToProps = (state, ownProps) => {
     return {
-        movies,
-        searchBy: searchBy || params.get(SEARCH_BY_PARAM_TEXT) || SEARCH_BY_DEFAULT_VALUE,
-        sortBy: sortBy || params.get(SORT_BY_PARAM_TEXT) || SORT_BY_DEFAULT_VALUE,
-        searchTerm: searchTerm || params.get(SEARCH_TERM_PARAM_TEXT) || '',
+        ...getMoviesProps(state, ownProps)
     }
 };
 

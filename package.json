@@ -24,7 +24,7 @@
   "homepage": "https://github.com/Libida/ReactJS2020Q2#readme",
   "dependencies": {
     "@babel/runtime": "^7.10.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "axios-mock-adapter": "^1.18.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.4.1",
